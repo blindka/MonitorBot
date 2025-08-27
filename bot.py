@@ -41,7 +41,7 @@ async def handle_docs(message):
     try:
         response = process_document_file(message)
         await bot.reply_to(message, response, parse_mode="HTML")
-        logger.info(f"Processed document file from user {message.chat.id}")
+        logger.info(f"Received document file from user <b>{message.chat.id}</b>")
     except Exception as e:
         logger.error(f"Error in handle_docs: {e}")
 
@@ -54,7 +54,7 @@ async def handle_docs_audio(message):
     try:
         response = process_audio_file(message)
         await bot.reply_to(message, response, parse_mode="HTML")
-        logger.info(f"Processed audio file from user {message.chat.id}")
+        logger.info(f"Processed audio file from user <b>{message.chat.id}</b>")
     except Exception as e:
         logger.error(f"Error in handle_docs_audio: {e}")
 
@@ -63,10 +63,10 @@ async def echo_all(message):
     try:
         if len(message.text) > 1000:
             await bot.reply_to(message, "Message is too long!")
-            logger.warning(f"User {message.chat.id} sent a message that is too long.")
+            logger.warning(f"User <b>{message.chat.id}</b> sent a message that is too long.")
             return
         await bot.reply_to(message, message.text)
-        logger.info(f"Echoed message to user {message.chat.id}")
+        logger.info(f"Echoed message to user <b>{message.chat.id}</b>")
     except Exception as e:
         logger.error(f"Error in echo_all: {e}")
             
@@ -75,6 +75,6 @@ if __name__ == "__main__":
         logger.info("Bot is starting...")
         asyncio.run(bot.infinity_polling())
     except KeyboardInterrupt:
-        logger.info("Bot stopped by user.")
+        logger.info("Bot stopped by <b> {message.chat.id}</b>")
     except Exception as e:
         logger.error(f"Unexpected error: {e}")
