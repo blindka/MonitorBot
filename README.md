@@ -1,4 +1,4 @@
-# Monitor - bot for telegram
+# Monitor Bot (for telegram)
 
 ## License
 
