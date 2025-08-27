@@ -8,6 +8,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 load_dotenv()
+logger.info(f"BOT_TOKEN loaded: {os.environ.get('BOT_TOKEN') is not None}")
+
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
