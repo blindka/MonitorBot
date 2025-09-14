@@ -36,20 +36,11 @@ async def send_welcome(message):
     except Exception as e:
         logger.error(f"Error in send_welcome: {e}")
 
-@bot.message_handler(func=lambda message: message.text and message.text.startswith('/'))
-async def handle_unknown_command(message):
-    try:
-        await bot.reply_to(message, "Unknown command, Please try again.")
-        logger.warning(f"User {message.chat.id} sent an unknown command: {message.text}")
-    except Exception as e:
-        logger.error(f"Error in handle_unknown_command: {e}")
-
 # Help command handler
 @bot.message_handler(commands=["help"])
 async def send_help(message):
     try:
         help_text = (
-            "<b>Help Menu</b>\n\n"
             "/start - Start using the bot\n"
             "/hello - Welcome message\n"
             "/help - Show this menu\n"
@@ -98,7 +89,15 @@ async def echo_all(message):
         logger.info(f"Echoed message to user {message.chat.id}")
     except Exception as e:
         logger.error(f"Error in echo_all: {e}")
-            
+
+@bot.message_handler(func=lambda message: message.text and message.text.startswith('/'))
+async def handle_unknown_command(message):
+    try:
+        await bot.reply_to(message, "Unknown command, Please try again.")
+        logger.warning(f"User {message.chat.id} sent an unknown command: {message.text}")
+    except Exception as e:
+        logger.error(f"Error in handle_unknown_command: {e}")
+        
 if __name__ == "__main__":
     try:
         logger.info("Bot is starting...")
